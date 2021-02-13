@@ -1,0 +1,39 @@
+---
+
+- hosts: localhost
+  tasks:
+    - name: Install Python dependencies
+      pip:
+        name:
+          - docker
+          - pytest
+          - requests
+
+    - name: Serve sample website
+      block:
+        - name: Test for a running website
+          command: python -m pytest ./tests/test_website.py --no-header --no-summary -q
+      rescue:
+        - name: Build Docker image from Dockerfile
+          docker_image:
+            build:
+              args:
+                TOMCAT_TAG: "{{ tomcat_tag }}"
+              path: ./docker
+              pull: no
+            name: redhat
+            source: build
+            state: present
+            tag: v1
+
+        - name: Run the container
+          docker_container:
+            auto_remove: yes
+            container_default_behavior: no_defaults
+            image: redhat:v1
+            name: redhat
+            ports:
+              - "8080:8080"
+            state: started
+  vars:
+    tomcat_tag: "9.0"
