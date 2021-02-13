@@ -1,0 +1,14 @@
+---
+
+- hosts: localhost
+  tasks:
+    - name: Remove container
+      docker_container:
+        name: redhat
+        state: absent
+
+    - name: Remove Docker image
+      docker_image:
+        name: redhat
+        state: absent
+        tag: v1
