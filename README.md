@@ -5,7 +5,7 @@ This repository contains the code for the RedHat's DevOps Assignment. Included i
 
 ## How to use
 
-To test the Ansible playbook, run the following commands:
+The easiest way to see if the code is working is by taking a look to the [GitHub Actions workflow](https://github.com/davidmogar/redhatprivate/actions). Alternatively, to run in in a different machine, you can run the following commands:
 
 ```bash
 git clone https://github.com/davidmogar/redhatprivate.git
@@ -31,6 +31,12 @@ To change the tag when running th Ansible playbook:
 ```bash
 ansible-playbook playbook.yml --extra-vars "tomcat_tag=10.0"
 ```
+
+### GitHub Actions
+
+The GitHup repository contains a [workflow](https://github.com/davidmogar/redhatprivate/blob/main/.github/workflows/main.yml) to:
+* Validate the syntax of the Ansible playbooks. For this, the master branch of the ansible-lint action is used. Tags `v4.1.0` and `v4.1.0.post0` are broken and undocumented at the moment of writing this document.
+* Test the Ansible playbook and ensure the changes to the repository don't break the deployment.
 
 ### Pytest
 
