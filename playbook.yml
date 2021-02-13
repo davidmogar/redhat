@@ -4,7 +4,7 @@
   handlers:
     - name: Test deployment
       command: python -m pytest ./tests/test_website.py --no-header --no-summary -q
-      delay: 5
+      delay: 3
       register: result
       retries: 3
       until: result.rc == 0
