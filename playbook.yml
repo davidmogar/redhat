@@ -1,6 +1,13 @@
 ---
 
 - hosts: localhost
+  handlers:
+    - name: Test deployment
+      command: python -m pytest ./tests/test_website.py --no-header --no-summary -q
+      delay: 5
+      register: result
+      retries: 3
+      until: result.rc == 0
   tasks:
     - name: Install Python dependencies
       pip:
@@ -35,5 +42,6 @@
             ports:
               - "8080:8080"
             state: started
+          notify: Test deployment
   vars:
     tomcat_tag: "9.0"
