@@ -38,6 +38,8 @@ The GitHup repository contains a [workflow](https://github.com/davidmogar/redhat
 * Validate the syntax of the Ansible playbooks. For this, the master branch of the ansible-lint action is used. Tags `v4.1.0` and `v4.1.0.post0` are broken and undocumented at the moment of writing this document.
 * Test the Ansible playbook and ensure the changes to the repository don't break the deployment.
 
+The workflow uses `ubuntu-latest` as it's the only Linux distrubution available.
+
 ### Pytest
 
 As requested, I used Pytest to validate the correct deployment of the site. This test checks for:
